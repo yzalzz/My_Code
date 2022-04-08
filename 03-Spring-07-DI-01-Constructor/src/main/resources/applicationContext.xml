@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    这里会默认使用无参构造创建对象-->
+<!--    通过构造方法注入参数-->
+<bean id="car" class="com.fc.entity.Car">
+<!--
+constructor-arg通过构造方法进行注入
+type 注入的参数类型
+index 索引
+ref 导入其他类型的对象
+-->
+    <constructor-arg index="1" type="java.lang.String" value="红色"/>
+    <constructor-arg name="speed" type="java.lang.Float"  value="120"/>
+</bean>
+    <bean class="com.fc.entity.Car" id="car1">
+        <constructor-arg index="1" type="java.lang.String" value="黑色"/>
+        <constructor-arg name="speed" type="java.lang.Float"  value="150"/>
+    </bean>
+    <bean id="person" class="com.fc.entity.Person">
+        <constructor-arg name="name" value="彭于晏" type="java.lang.String"/>
+        <constructor-arg name="gender" value="爷们" type="java.lang.String"/>
+<!--
+因为car不是基本数据类型 所以用type="com.fc.entity.Car" spring容器中已经有car所以会默认从容器中找car
+容器创建对象的时候，如果发现需要一些参数，会默认从容器里查找，能找到就直接使用
+-->
+        <constructor-arg name="car" type="com.fc.entity.Car" ref="car1"/>
+    </bean>
+</beans>
