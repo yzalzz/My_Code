@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+   <!--    控制反转注解使用注解进行注入
+    @Controller 放在Controller上
+    @Service  放在Service上
+    @Repository 放在dao上
+    @Component 放在entity上
+    -->
+<!--    依赖注入注解
+@Autowired 自动按照类型注入 前提是Spring中有这个对象
+@Qualifier 在根据类型中注入的基础之上再按照名称注入，value属性：用于指定注入bean的id 如果有多个@Repository可以用它来区别
+@Resource 直接按照bean的id注入。它可以独立使用，name属性：用于指定bean的id 相当于@Autowired @Qualifier二合一
+@Value 用于给成员变量注入基本类型和String类型的数据
+-->
+    <!--component-scan 用来扫描指定包下的所有注解-->
+    <context:component-scan base-package="com.fc"/>
+</beans>
