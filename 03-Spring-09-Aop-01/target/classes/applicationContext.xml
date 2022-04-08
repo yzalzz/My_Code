@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--Target :真实对象-->
+    <bean id="userService" class="com.fc.Service.Impl.UserServiceImpl"/>
+    <!--advice 增强通知 增强内容-->
+    <bean  id="advice" class="com.fc.advice.XMLAdvice"/>
+<!--  config proxy-target-class 用于设置代理的类型  true 就是用的CGLib  false用的jdk-->
+    <aop:config proxy-target-class="true"/>
+    <!--此标签用于设置所有的aop相关的配置-->
+        <aop:config>
+<!--    切点-->
+            <aop:pointcut id="pointcut" expression="execution(* com.fc.Service.Impl.*ServiceImpl.add(..))"/>
+<!-- 切面 = 切点加增强方法-->
+            <aop:aspect ref="advice">
+                <aop:before method="before" pointcut-ref="pointcut"/>
+                <aop:after-returning method="AfterReturning" pointcut-ref="pointcut"/>
+                <aop:after method="After" pointcut-ref="pointcut"/>
+              <aop:around method="Around" pointcut-ref="pointcut"/>
+            </aop:aspect>
+        </aop:config>
+    </beans>
