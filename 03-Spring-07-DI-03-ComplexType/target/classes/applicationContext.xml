@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="car" class="com.fc.entity.Car">
+        <property name="brand" value="宝马"/>
+        <property name="color" value="红"/>
+      </bean>
+<!--复杂数据进行注入-->
+<bean id="complexType" class="com.fc.entity.ComplexType">
+<!-- list集合进行注入-->
+    <property name="list">
+        <list>
+            <value>彭于晏</value>
+            <value>胡歌</value>
+            <value>吴京</value>
+            <value>黄渤</value>
+        </list>
+    </property>
+<!-- 数组进行注入-->
+    <property name="objects">
+        <array>
+            <value>1</value>
+            <value>孟志斌</value>
+            <value>蹲坑</value>
+            <value>蹲亿天</value>
+        </array>
+    </property>
+<!--    Set集合进行注入-->
+    <property name="set" >
+        <set>
+            <value>123</value>
+            <value>456</value>
+            <value>789</value>
+        </set>
+    </property>
+<!-- 键值对进行注入-->
+    <property name="map">
+      <map>
+<!--entry把键和值封装为一个对象-->
+          <entry key="迪丽热巴" value-ref="car"/>
+          <entry key="腾格尔" value="嗨害嗨"/>
+      </map>
+    </property>
+</bean>
+</beans>
