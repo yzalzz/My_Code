@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--constructor-arg 这种注入方法是通过实体类中的构造方法进行注入的  Set 是通过实体类色图方法进行注入的-->
+<bean id="car" class="com.fc.entity.Car">
+    <property name="color" value="绿"/>
+    <property name="speed" value="250"/>
+</bean>
+    <bean  id="person" class="com.fc.entity.Person">
+        <property name="name" value="胡歌"/>
+        <property name="car" ref="car"/>
+        <property name="gender" value="纯爷们"/>
+    </bean>
+</beans>
