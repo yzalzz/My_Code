@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
+<mapper namespace="com.fc.dao.StudentDao">
+<!-- 多对多-->
+    <resultMap id="findAllWithSubjectMap" type="com.fc.entity.Student">
+        <id column="stu_id" property="id"/>
+        <result column="stu_name" property="name"/>
+        <collection property="subjects" javaType="List" ofType="com.fc.entity.Subject">
+        <id column="id" property="id"/>
+            <result column="name" property="name"/>
+        </collection>
+    </resultMap>
+
+    <select id="findAllWithSubject" resultMap="findAllWithSubjectMap">
+        select stu.id as stu_id,stu.name as stu_name ,sub.id ,sub.name from student stu
+        inner join student_ref_subject srs
+        on stu.id=srs.stu_id
+        inner join subject sub
+        on sub.id=srs.sub_id
+    </select>
+
+
+
+
+
+
+
+
+
+
+<!-- <resultMap id="findAllWithSubjectMap" type="com.fc.entity.Student">-->
+<!--  <id column="stu_id" property="id"/>-->
+<!--  <result column="stu_name" property="name"/>-->
+<!--  <result column="age" property="age"/>-->
+<!--  <result column="gender" property="gender"/>-->
+<!--  <result column="birthday" property="birthday"/>-->
+<!--  <result column="info" property="info"/>-->
+
+<!--  <collection property="subjects" javaType="List" ofType="com.fc.entity.Subject">-->
+<!--   <id column="sub_id" property="id"/>-->
+<!--   <result column="sub_name" property="name"/>-->
+
+<!--  </collection>-->
+<!-- </resultMap>-->
+<!--<select id="findAllWithSubject" resultMap="findAllWithSubjectMap">-->
+<!--    select stu.id as stu_id ,stu.name as stu_name , sub.id as sub_id , sub.name as sub_name-->
+<!--    from student stu-->
+<!--    &lt;!&ndash;学生表要和中间表链接&ndash;&gt;-->
+<!--    inner join student_ref_subject srs-->
+<!--    on stu.id=srs.stu_id-->
+<!--    inner join subject sub-->
+<!--    on sub.id=srs.sub_id-->
+<!--</select-->
+        </mapper>

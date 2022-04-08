@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
+
+<mapper namespace="com.fc.dao.EmployeeDao">
+<!--一对一操作-->
+<resultMap id="findAllMap" type="com.fc.entity.Employee">
+    <id column="emp_id" property="id"/>
+    <result column="emp_name" property="name"/>
+    <association property="department" javaType="com.fc.entity.Department">
+        <id column="dept_id" property="id"/>
+        <result column="dept_name" property="name"/>
+    </association>
+</resultMap>
+
+
+
+
+    <select id="findAll" resultMap="findAllMap">
+        select * from employee
+        inner join department d
+        on employee.dept_id = d.dept_id
+    </select>
+<!--    <resultMap id="findAllMap" type="com.fc.entity.Employee">-->
+<!--        <id column="emp_id" property="id"/>-->
+<!--        <result column="emp_name" property="name"/>-->
+<!--        &lt;!&ndash;一对一使用的标签 &ndash;&gt;-->
+<!--        <association property="department" javaType="com.fc.entity.Department">-->
+<!--            <id column="dept_id" property="id"/>-->
+<!--            <result column="dept_name" property="name"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+<!--    <select id="findAll" resultMap="findAllMap">-->
+<!--        select * from employee-->
+<!--        &lt;!&ndash;关联表的操作&ndash;&gt;-->
+<!--        inner join department d on employee.dept_id = d.dept_id-->
+<!--    </select>-->
+
+
+
+
+
+
+
+
+<!--&lt;!&ndash;    一对一操作&ndash;&gt;-->
+<!--    <resultMap id="findAllMap" type="com.fc.entity.Employee">-->
+<!--        <id column="emp_id" property="id"/>-->
+<!--        <result column="emp_name" property="name"/>-->
+<!--&lt;!&ndash;  一对一使用标签association 里面必须写 property 和 javaType&ndash;&gt;-->
+<!--        <association property="department" javaType="com.fc.entity.Department">-->
+<!--            <id column="dept_id" property="id"/>-->
+<!--            <result column="dept_name" property="name"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+<!--    <select id="findAll" resultMap="findAllMap">-->
+<!--        select * from employee-->
+<!--            &lt;!&ndash;关联表操作&ndash;&gt;-->
+<!--       inner join department d-->
+<!--       on employee.dept_id = d.dept_id-->
+
+<!--    </select>-->
+
+
+
+
+<!--    <resultMap id="employeeMap" type="com.fc.entity.Employee">-->
+<!--        <id column="emp_id" property="id"/>-->
+<!--        <result column="emp_name" property="name"/>-->
+<!--        &lt;!&ndash;一对一 要用association(关联) 里面必须配置property he javaType&ndash;&gt;-->
+<!--        <association property="department" javaType="com.fc.entity.Department">-->
+<!--            <id column="dept_id" property="id"/>-->
+<!--            <result property="name" column="dept_name"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+
+<!--<select id="findAll" resultMap="employeeMap">-->
+<!--    select *from employee-->
+<!--        &lt;!&ndash;关联表&ndash;&gt;-->
+<!--inner join department d-->
+<!--on employee.dept_id = d.dept_id-->
+<!--</select>-->
+</mapper>
