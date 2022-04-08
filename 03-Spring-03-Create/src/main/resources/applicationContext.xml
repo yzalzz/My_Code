@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--  Bean的三种创建方式 通过无参构造方法    通过工厂方法去创建    通过静态工厂创建   -->
+<!--无参构造创建Bean-->
+<bean id="userDao" class="com.fc.dao.impl.UserDaoImpl"/>
+<!-- 通过工厂方法去创建-->
+    <bean id="daoFactory" class="com.fc.util.UserDaoFactory"/>
+<!--    通过工厂方法获取对象-->
+    <bean id="userDao2" factory-bean="daoFactory" factory-method="getUserDao"/>
+<!--    通过静态工厂创建-->
+   <bean id="userDao3" class="com.fc.util.UserDaoStaticFactory" factory-method="getUserDao"/>
+</beans>
