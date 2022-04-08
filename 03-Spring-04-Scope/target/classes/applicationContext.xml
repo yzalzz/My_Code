@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- scope（作用域）的默认值为singleton(单例)可以不用写 prototype（多例）-->
+<!--    单例默认为在容器启动时就执行  而多例则会在getBean执行的时候执行-->
+<bean id="student" scope="prototype" class="com.fc.entity.Student"/>
+
+</beans>
