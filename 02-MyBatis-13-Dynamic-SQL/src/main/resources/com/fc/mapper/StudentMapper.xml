@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
+<mapper namespace="com.fc.dao.StudentDao">
+<!--sql标签用来声明可以复用sql语句片段-->
+    <sql id="filed" >
+        id,name,age,gender,birthday,info
+    </sql>
+    <select id="findAll" resultType="com.fc.entity.Student">
+    <!--include标签是用来导入sql声明的片段-->
+       select <include refid="filed"/> from student
+    </select>
+<!--if标签是用来进行条件判断的，如果符合条件执行对应的操作-->
+    <select id="findByKeyWord" resultType="com.fc.entity.Student">
+      select <include refid="filed"/> from student
+          where 1=1
+        <if test="name != null">
+            and name like #{name}
+        </if>
+        <if test="info !=null">
+            and info like #{info}
+        </if>
+    </select>
+    <!--where标签可以自动忽略前缀和后缀如and or-->
+    <select id="findByStudent" resultType="com.fc.entity.Student">
+        select <include refid="filed"/>
+        from student
+        <where>
+            <if test="id !=null">
+                and id = #{id}
+            </if>
+            <if test="name != null">
+                and name =#{name}
+            </if>
+            <if test="age !=null">
+                and age = #{age}
+            </if>
+            <if test="gender != null">
+                and gender =#{gender}
+            </if>
+            <if test="birthday !=null">
+                and birthday= #{birthday}
+            </if>
+            <if test="info != null">
+                and info =#{info}
+            </if>
+        </where>
+    </select>
+    <!--set标签用于update修改操作而且会消除任意无关的符号-->
+    <update id="update">
+        update student
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="info != null">
+                info = #{info},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--trim标签用来去除多余的前缀 后缀 ，用来代替一些较为繁琐的标签-->
+    <!-- prefix 代替内容-->
+    <!--prefixOverrides 忽略的内容 前缀-->
+    <select id="findByStudentOnTrim" resultType="com.fc.entity.Student">
+        select <include refid="filed"/>
+            from student
+        <trim prefix="where" prefixOverrides="or">
+        <if test="id !=null">
+            and id =#{id}
+        </if>
+            <if test="name !=null">
+                or name =#{name}
+            </if>
+            <if test="age !=null">
+                or age=#{age}
+            </if>
+            <if test="id !=null">
+                or gender =#{gender}
+            </if>
+            <if test="birthday !=null">
+                or birthday =#{birthday}
+            </if>
+            <if test="info !=null">
+                or info =#{info}
+            </if>
+        </trim>
+    </select>
+    <delete id="delete">
+        delete from student where id in
+        <foreach collection="array" separator="," open="(" close=")" item="id" index="i">
+            #{id}
+        </foreach>
+
+    </delete>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--sql标签是用来声明一个可复用的sql片段-->
+<!--    <sql id="filed">-->
+<!--        id,name,age,gender,birthday,info-->
+<!--    </sql>-->
+<!--<select id="findAll" resultType="com.fc.entity.Student">-->
+
+<!--    &lt;!&ndash;  *代表全部        include标签导入声明sql的标签&ndash;&gt;-->
+
+<!--    select <include refid="filed"/>-->
+<!--    from student-->
+<!--</select>-->
+<!--    <select id="findByKeyword" resultType="com.fc.entity.Student">-->
+<!--        select <include refid="filed"/>-->
+<!--        from student-->
+<!--        where 1 = 1-->
+<!--&lt;!&ndash;if标签用于条件判断 如果符合要求则执行对应的内容 里面必须要有test属性&ndash;&gt;-->
+<!--        <if test="name != null">-->
+<!--            and name like #{name}-->
+<!--        </if>-->
+
+<!--        <if test="info != null">-->
+<!--            and info like #{info}-->
+<!--        </if>-->
+<!--    </select>-->
+
+
+<!--    &lt;!&ndash;where标签 可以自动去除前缀 后缀-->
+<!--    or满足一个条件即可-->
+<!--    and必须满足and的全部条件-->
+<!--    &ndash;&gt;-->
+<!--    <select id="findByStudent" resultType="com.fc.entity.Student">-->
+<!--        select <include refid="filed"/>-->
+<!--        from student-->
+<!--        <where>-->
+<!--            <if test="id != null">-->
+<!--                and id=#{id}-->
+<!--            </if>-->
+<!--            <if test="name !=null">-->
+<!--               and name=#{name}-->
+<!--            </if>-->
+<!--            <if test="age != null">-->
+<!--                and  age =#{age}-->
+<!--            </if>-->
+<!--            <if test="gender != null">-->
+<!--                and  gender = #{gender}-->
+<!--            </if>-->
+<!--            <if test="birthday != null">-->
+<!--                and   birthday = #{birthday}-->
+<!--            </if>-->
+<!--            <if test="info != null">-->
+<!--                and  info = #{info}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+<!--    &lt;!&ndash;set标签用于update修改操作而且他会消除任意无关的符号&ndash;&gt;-->
+<!--    <update id="update" >-->
+<!--        update student-->
+<!--        <set>-->
+<!--            <if test="name !=null">-->
+<!--                name =#{name},-->
+<!--            </if>-->
+<!--            <if test="age !=null">-->
+<!--                age =#{age},-->
+<!--            </if>-->
+<!--            <if test="name !=null">-->
+<!--                gender =#{gender},-->
+<!--            </if>-->
+<!--            <if test="birthday !=null">-->
+<!--                birthday =#{birthday},-->
+<!--            </if>-->
+<!--            <if test="info !=null">-->
+<!--                info=#{info},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id=#{id}-->
+<!--    </update>-->
+
+
+<!--&lt;!&ndash;trim标签 用来去除指定的多余的前缀和后后缀 用来代替一些比较繁琐的标签-->
+<!--prefix:前缀-->
+<!-- prefixOverrides：指定忽略的内容(前缀)-->
+<!-- suffixOverrides:指定忽略的内容(后缀)-->
+<!--&ndash;&gt;-->
+<!--    <select id="findByStudentOnTrim" resultType="com.fc.entity.Student">-->
+<!--        select <include refid="filed"/>-->
+<!--        from student-->
+<!--       <trim prefix="where" prefixOverrides="and">-->
+<!--            <if test="id != null">-->
+<!--             and id =#{id}-->
+<!--            </if>-->
+<!--            <if test="name != null">-->
+<!--                and name =#{name}-->
+<!--            </if>-->
+<!--            <if test="age != null">-->
+<!--                and age =#{age}-->
+<!--            </if>-->
+<!--            <if test="gender != null">-->
+<!--                and gender =#{gender}-->
+<!--            </if>-->
+<!--            <if test="birthday != null">-->
+<!--                and birthday =#{birthday}-->
+<!--            </if>-->
+<!--            <if test="info != null">-->
+<!--                and info =#{info}-->
+<!--            </if>-->
+<!--       </trim>-->
+<!--    </select>-->
+<!--    <update id=" updateOnTrim" >-->
+<!--        update student-->
+<!--       <trim prefix="set" suffixOverrides=",">-->
+<!--            <if test="name !=null">-->
+<!--                name =#{name},-->
+<!--            </if>-->
+<!--            <if test="age !=null">-->
+<!--                age =#{age},-->
+<!--            </if>-->
+<!--            <if test="name !=null">-->
+<!--                gender =#{gender},-->
+<!--            </if>-->
+<!--            <if test="birthday !=null">-->
+<!--                birthday =#{birthday},-->
+<!--            </if>-->
+<!--            <if test="info !=null">-->
+<!--                info=#{info},-->
+<!--            </if>-->
+<!--       </trim>-->
+<!--            where id=#{id}-->
+<!--    </update>-->
+<!--    <delete id="deleteMore">-->
+<!--        delete from student where id in-->
+<!--        <foreach collection="array" separator="," open="(" close=")" index="i" item="id">-->
+<!--            #{id}-->
+<!--        </foreach>-->
+<!--    </delete>-->
+</mapper>
