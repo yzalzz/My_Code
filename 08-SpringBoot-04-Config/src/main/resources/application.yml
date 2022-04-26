@@ -1,0 +1,4 @@
+#配置活动环境
+spring:
+  profiles:
+    active: dev
