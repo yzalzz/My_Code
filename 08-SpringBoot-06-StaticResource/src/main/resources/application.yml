@@ -1,0 +1,21 @@
+#静态资源的访问路径前缀
+#spring:
+#  mvc:
+#    static-path-pattern: /static/**
+
+#配置本地静态资源路径 只有在index路经下才能访问
+#spring:
+#  web:
+#    resources:
+#      static-locations: classpath:/index/
+
+
+
+#spring:
+#  mvc:
+#    static-path-pattern: /static/**
+#    web:
+#        resources:
+#          static-locations: classpath:/index/
+
+
