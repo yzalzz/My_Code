@@ -1,0 +1,83 @@
+#spring:
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/dev01?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimeZone=GTM+8
+#    username: root
+#    password: yza20020128.
+#
+#    #因为用的mybatis 所以要配置mybatis
+#    mybatis:
+#      # 扫描指定路径下的映射文件（sql）
+#      mapper-locations: classpath:com/fc/mapper/*.xml
+#      configuration:
+#        # 加sql执行日志
+#        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#        # 二级缓存 需要在实体类中实现序列化  Mapper加 <cache/>
+#        cache-enabled: true
+#        # 主键回填
+#        use-generated-keys: true
+#        # 驼峰映射
+#        map-underscore-to-camel-case: true
+#        # 懒加载
+#        lazy-loading-enabled: true
+#        # 积极加载
+#        aggressive-lazy-loading: false
+#      # 别名所在的包
+#      type-aliases-package: com.fc.entity
+#      # mybatis-config.xml配置文件所在的路径
+#    #  config-location:
+#
+##    #分页配置
+##pagehelper:
+##  #分页参数合理化
+##  reasonable: true
+##  #配置数据库方言
+##  dialect: mysql
+#
+#
+#
+#
+#
+#
+spring:
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dev01?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimeZone=GTM+8
+    username: root
+    password: yza20020128.
+  mvc:
+    hiddenmethod:
+      filter:
+        #开启隐藏方法支持的表单提交，支持put,delete提交支持
+        enabled: true
+
+
+mybatis:
+  # mybatis-config.xml配置文件所在的路径
+  #  config-location:
+  # 扫描指定路径下的映射文件（sql）
+  mapper-locations: classpath:com/fc/mapper/*.xml
+  configuration:
+    # 加sql执行日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 二级缓存
+    cache-enabled: true
+    # 主键回填
+    use-generated-keys: true
+    # 驼峰映射
+    map-underscore-to-camel-case: true
+    # 懒加载
+    lazy-loading-enabled: true
+    # 积极加载
+    aggressive-lazy-loading: false
+  # 别名所在的包
+  type-aliases-package: com.fc.entity
+
+#pagehelper:
+#  # 分页参数合理化
+#  reasonable: true
+#  # 配置数据库方言
+#  dialect: mysql

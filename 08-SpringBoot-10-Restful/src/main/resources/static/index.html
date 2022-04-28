@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试表单提交Restful</title>
+</head>
+<body>
+<!--模拟删除操作-->
+<form method="post" action="/user/1">
+    <input name="_method" value="DELETE" hidden>
+    <input type="submit" value="delete提交">
+</form>
+<!--模拟修改操作-->
+<form method="post" action="/user/1/小明/123">
+    <input name="_method" value="PUT" hidden>
+    <input type="submit" value="put提交">
+</form>
+<!--模拟添加操作-->
+<form method="post" action="/user/小明/123">
+    <input type="submit" value="post提交">
+</form>
+<!--模拟查询操作-->
+<form method="get" action="/user">
+
+    <input type="submit" value="get提交">
+</form>
+
+</body>
+</html>
