@@ -1,0 +1,21 @@
+#配置邮件发送
+spring:
+  #文件上传
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 100MB
+      max-file-size: 10MB
+  mail:
+    #发送邮件的服务器主机地址
+    host: smtp.qq.com
+    #邮箱
+    username: 2559265773@qq.com
+    #密码是第三方授权码，不是QQ密码
+    password: mdisxsevdwzreacg
+    default-encoding: UTF-8
+    port: 587
+    properties:
+      mail:
+        debug: true
+
