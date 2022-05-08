@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>测试Ajax上传文件</title>
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<form id="form">
+    头像：<input type="file" name="headImg">
+    <!--可以选择多个文件-->
+    照片：<input type="file" name="photo" multiple>
+    <button onclick="upload()" type="button">上传</button>
+</form>
+
+<img src="" id="headerImg">
+</body>
+<script>
+    function upload() {
+        var data = new FormData(document.getElementById("form"))
+
+        $.ajax({
+            url: "/fileUpload/json",
+            type: "post",
+            data: data,
+            // 这俩东西必须写
+            contentType: false,
+            processData: false,
+            success: function (resp) {
+                alert(resp.message);
+
+                var array = resp.data;
+
+                var headerImgPath = resp.data[0];
+
+                $("#headerImg").attr("src", headerImgPath);
+            }
+        })
+    }
+</script>
+</html>
