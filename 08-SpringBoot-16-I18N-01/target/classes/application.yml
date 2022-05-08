@@ -1,0 +1,5 @@
+#配置国际化
+spring:
+  messages:
+    encoding: UTF-8
+    basename: static/i18n/messages
